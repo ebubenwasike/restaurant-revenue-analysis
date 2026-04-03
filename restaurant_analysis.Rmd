@@ -1,0 +1,59 @@
+---
+title: "Statistical Consulting Report: Restaurant Revenue Optimization"
+author: "Ebube Nwasike"
+output: html_document
+---
+
+## 1. Introduction
+
+A restaurant aims to understand what factors influence customer spending and tipping behavior in order to improve revenue.
+
+---
+
+## 2. Data
+
+```{r}
+data <- read.csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+
+data <- na.omit(data)
+
+data$sex <- as.factor(data$sex)
+data$smoker <- as.factor(data$smoker)
+data$day <- as.factor(data$day)
+data$time <- as.factor(data$time)
+
+head(data)
+model <- lm(tip ~ total_bill + size + day + time + smoker, data = data)
+summary(model)
+anova_model <- aov(tip ~ day, data = data)
+summary(anova_model)
+
+library(ggplot2)
+
+ggplot(data, aes(x = total_bill, y = tip)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+ggplot(data, aes(x = day, y = tip)) +
+  geom_boxplot()
+```
+## 5. Key Findings
+
+The analysis indicates that total bill amount is the strongest predictor of tipping behavior. As customer spending increases, tips increase significantly.
+
+Group size also shows a positive relationship with tipping, suggesting that larger parties tend to tip more.
+
+No statistically significant differences were observed across days of the week, time of service, or smoking status.
+
+---
+
+## 6. Recommendations
+
+- Focus on increasing total bill value through upselling or bundling strategies  
+- Prioritize service strategies for larger groups  
+- Avoid overemphasizing operational changes based on day or time  
+
+---
+
+## 7. Conclusion
+
+This analysis demonstrates that revenue-driven factors, particularly total bill size, are the primary drivers of tipping behavior. Strategic efforts to increase customer spending are likely to yield the greatest impact.
