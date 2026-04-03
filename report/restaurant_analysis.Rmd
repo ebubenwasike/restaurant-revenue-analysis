@@ -1,6 +1,6 @@
 ---
 title: "Statistical Consulting Report: Restaurant Revenue Optimization"
-author: "Ebube Nwasike"
+author: "Ebube Nwasike ❤️"
 output: html_document
 ---
 
